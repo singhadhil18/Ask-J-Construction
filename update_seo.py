@@ -8,7 +8,7 @@ import json
 import re
 
 ROOT = Path(__file__).resolve().parent
-BASE = 'https://www.askjconstruction.com'
+BASE = 'https://askjconstruction.co.za'
 AREA = 'Durban and the KwaZulu-Natal North Coast through Ballito and surrounding suburbs'
 AREAS = ['Durban', 'Durban North', 'La Lucia', 'Umhlanga', 'Umdloti',
          'Westbrook', 'Tongaat', 'Ballito', 'Shaka’s Rock', 'Salt Rock']

@@ -16,3 +16,4 @@ assets/*.lossless.webp
 inspect_header.cjs
 audit_file_header.cjs
 audit_header_desktop.cjs
+.release-stage/

@@ -13,7 +13,7 @@ Status: initial implementation complete locally. Owner confirmed all constructio
 
 ## Deployment notes
 
-Canonical URLs and sitemap use https://www.askjconstruction.com/ and the current .html routes. Before replacing the Wix site, preserve old extensionless routes with redirects to the corresponding .html pages (or revise the generator to the final hosting routes). These changes are local and are not published.
+Canonical URLs, structured data and the sitemap use https://askjconstruction.co.za/ with .html routes. WebHostMost redirects www, HTTP, index.html and known extensionless page routes to these canonical URLs. The separate old .com domain is not controlled by this deployment.
 
 Run `python update_seo.py` to regenerate the answer page, metadata and sitemap. If the recovery is regenerated, reapply the header changes as well. The generator does not rebuild the sticky header.
 
