@@ -1,0 +1,94 @@
+/* Small-screen layout only. Desktop colours, fonts, assets and layout are inherited. */
+@media (max-width: 979px) {
+  html, body, #SITE_CONTAINER, #main_MF, #site-root, #masterPage,
+  #PAGES_CONTAINER, #SITE_PAGES, #SITE_FOOTER, [id^="pageBackground_"] {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  #SITE_HEADER {
+    grid-template-columns: minmax(0, 1fr) 160px;
+    min-height: 0;
+    height: auto;
+    max-height: none;
+    grid-template-rows: calc(160px * 165 / 259) auto;
+    padding: 8px 16px;
+    gap: 8px;
+  }
+  #SITE_HEADER .header-logo, #SITE_HEADER .header-logo img { width: 160px; }
+  #SITE_HEADER .header-logo img { height: auto; aspect-ratio: 259 / 165; }
+  #SITE_HEADER .header-quote { padding: 0 10px; font-size: 13px; }
+  #SITE_HEADER .recovered-nav {
+    grid-column: 1 / -1;
+    justify-content: center;
+    justify-self: stretch;
+    max-width: none;
+    width: auto;
+    gap: 0 12px;
+  }
+  #SITE_HEADER .recovered-nav a { display: inline-flex; align-items: center; min-height: 44px; }
+  #PAGES_CONTAINER [id^="comp-"],
+  #PAGES_CONTAINER [data-mesh-id],
+  #SITE_FOOTER [data-mesh-id] {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  #PAGES_CONTAINER .wixui-page { min-width: 0 !important; width: 100% !important; }
+  #PAGES_CONTAINER [data-mesh-id$="-gridContainer"] {
+    display: flex !important;
+    flex-direction: column;
+    height: auto !important;
+    min-height: 0 !important;
+    gap: 24px;
+  }
+  #PAGES_CONTAINER [data-mesh-id$="-gridContainer"] > [id] {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    margin: 0 !important;
+    align-self: stretch !important;
+    width: auto !important;
+    height: auto !important;
+  }
+  #PAGES_CONTAINER [data-mesh-id*="-wedge-"] { display: none !important; }
+  #PAGES_CONTAINER .wixui-section { padding: 32px 20px; box-sizing: border-box; }
+  #PAGES_CONTAINER .wixui-column-strip { min-width: 0 !important; width: 100% !important; }
+  #PAGES_CONTAINER [data-testid="columns"] { flex-direction: column !important; gap: 24px; }
+  #PAGES_CONTAINER .wixui-column-strip__column { flex: auto !important; width: 100% !important; }
+  #PAGES_CONTAINER .wixui-rich-text { height: auto !important; overflow-wrap: break-word; }
+  #PAGES_CONTAINER .wixui-rich-text h1 { font-size: clamp(28px, 7vw, 40px) !important; }
+  #PAGES_CONTAINER .wixui-rich-text h2:not(.font_6) { font-size: clamp(25px, 6vw, 34px) !important; }
+  #PAGES_CONTAINER .wixui-rich-text h1 span,
+  #PAGES_CONTAINER .wixui-rich-text h2 span { font-size: inherit !important; }
+  #PAGES_CONTAINER .wixui-image { width: 100% !important; height: auto !important; }
+  #PAGES_CONTAINER .wixui-image img { width: 100%; height: auto; position: relative; }
+  #PAGES_CONTAINER .wixui-image > div { position: relative; }
+  #PAGES_CONTAINER a.wixui-button { position: relative !important; min-height: 44px; }
+  #comp-kbae5tti { min-height: 500px !important; }
+  #comp-kmf632zr { order: -1; }
+  #comp-kbae5tti [data-mesh-id$="-gridContainer"] { padding: 36px 16px; }
+  #comp-jnod9lp56, #comp-jnod9lp58, #comp-jnod9lp510 { min-height: 380px !important; }
+  #comp-jnod9lp56 a, #comp-jnod9lp58 a, #comp-jnod9lp510 a { min-height: 380px !important; }
+  #SITE_FOOTER [data-mesh-id$="-gridContainer"] {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 16px;
+    box-sizing: border-box;
+    min-height: 0;
+  }
+  #SITE_FOOTER [data-mesh-id$="-gridContainer"] > [id] { margin: 0 !important; left: auto !important; }
+  form input, form textarea, form select { font-size: 16px !important; }
+  form fieldset { min-width: 0; }
+  .local-answers { width: 100%; max-width: 100%; padding: 40px 20px; }
+}
+@media (max-width: 360px) {
+  #SITE_HEADER {
+    grid-template-columns: minmax(0, 1fr) 120px;
+    grid-template-rows: calc(120px * 165 / 259) auto;
+  }
+  #SITE_HEADER .header-logo, #SITE_HEADER .header-logo img { width: 120px; }
+  #SITE_HEADER .header-quote { padding: 0 8px; font-size: 12px; }
+}

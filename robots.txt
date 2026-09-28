@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /recovered-original/
+
+Sitemap: https://www.askjconstruction.com/sitemap.xml
