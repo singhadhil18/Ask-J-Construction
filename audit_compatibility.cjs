@@ -5,7 +5,9 @@ const {chromium, webkit} = require('./.qa-tools/node_modules/playwright-core');
 const {firefox} = require('./.qa-firefox/node_modules/playwright-core');
 const pages = ['index', 'about', 'services', 'projects', 'customer-testimonials', 'contact', 'service-areas-faq'];
 const selected = process.argv.slice(2).length ? process.argv.slice(2) : ['chromium', 'edge', 'webkit', 'firefox'];
-const prior = fs.existsSync('audits/compatibility.json') ? JSON.parse(fs.readFileSync('audits/compatibility.json')) : [];
+const baseUrl = (process.env.AUDIT_BASE_URL || 'http://127.0.0.1:8001').replace(/\/$/, '');
+const report = process.env.AUDIT_BASE_URL ? 'audits/live-compatibility.json' : 'audits/compatibility.json';
+const prior = fs.existsSync(report) ? JSON.parse(fs.readFileSync(report)) : [];
 const results = (Array.isArray(prior) ? prior : prior.results || []).filter(r=>!selected.includes(r.engine));
 fs.mkdirSync('audits', {recursive:true});
 (async () => {
@@ -19,7 +21,7 @@ fs.mkdirSync('audits', {recursive:true});
           const errors=[];
           const handler=e=>errors.push(e.message);
           page.on('pageerror',handler);
-          await page.goto(`http://127.0.0.1:8001/${name}.html`,{waitUntil:'networkidle'});
+          await page.goto(`${baseUrl}/${name}.html`,{waitUntil:'networkidle'});
           await page.evaluate(()=>document.fonts.ready);
           const state=await page.evaluate(()=>({viewport:innerWidth,width:document.documentElement.scrollWidth,header:document.querySelector('#SITE_HEADER').getBoundingClientRect().height,nav:document.querySelectorAll('.recovered-nav a').length}));
           assert(state.width<=state.viewport+1,`${engine} ${width} ${name} overflows: ${JSON.stringify(state)}`);
@@ -39,12 +41,12 @@ fs.mkdirSync('audits', {recursive:true});
           assert(footer.linkBottom<=footer.footerTop+1,`${engine} ${name}: footer link overlaps footer`);
           const broken=await page.evaluate(()=>Array.from(document.images).filter(i=>i.complete&&!i.naturalWidth).map(i=>i.currentSrc));
           assert.equal(broken.length,0,`${engine} ${name}: broken images ${broken}`);
-          await page.screenshot({path:`audits/${engine}-${width}-${name}.png`,fullPage:true});
+          await page.screenshot({path:`audits/${process.env.AUDIT_BASE_URL ? "live-" : ""}${engine}-${width}-${name}.png`,fullPage:true});
           results.push({engine,width,page:name,...state,headerTop,passed:true});
           page.off('pageerror',handler);
           console.log(`${engine} ${width} ${name}: PASS`);
         }
-        await page.goto('http://127.0.0.1:8001/contact.html');
+        await page.goto(`${baseUrl}/contact.html`);
         await page.evaluate(()=>{window.open=(url)=>{window.__testOutgoingUrl=url;return null;};});
         await page.getByRole('button',{name:'Send enquiry by WhatsApp'}).click();
         assert.equal(await page.evaluate(()=>window.__testOutgoingUrl),undefined,'Empty form must not open WhatsApp');
@@ -62,5 +64,5 @@ fs.mkdirSync('audits', {recursive:true});
       }
     } finally { await browser.close(); }
   }
-  fs.writeFileSync('audits/compatibility.json',JSON.stringify(results,null,2));
-})().catch(error=>{fs.writeFileSync('audits/compatibility.json',JSON.stringify({results,error:error.stack},null,2));console.error(error);process.exitCode=1;});
+  fs.writeFileSync(report,JSON.stringify(results,null,2));
+})().catch(error=>{fs.writeFileSync(report,JSON.stringify({results,error:error.stack},null,2));console.error(error);process.exitCode=1;});
