@@ -6,11 +6,11 @@ Verified 29 September 2026 (South African time).
 - Registrar: Frikkadel. Public delegation uses ns1.server1.webhostmost.com, ns2.server2.webhostmost.com, ns3.server3.webhostmost.com and ns4.server4.webhostmost.com. Root and www resolve to 66.78.41.25.
 - Host: WebHostMost server5; account xesuzeeq; SSH port 2323 using the existing pinned host key and local identity. No credentials belong in this repository.
 - Web root: /home/xesuzeeq/domains/askjconstruction.co.za/public_html. private_html points to public_html.
-- Deployed source: 348ca72a564aef98430921cd145cb546b2507a5f.
-- Artifact commit: 76ba18d746f39bfe0e488b696f71ec07336e597e.
+- Deployed source: 4e9f8c9 (favicon update).
+- Artifact commit: 7237f88baa56c92a39cfdc36618bf9dde18409f2.
 - Separate release repository: /home/xesuzeeq/domains/askjconstruction.co.za/askj-release.git, branch release.
 - Receipt: /home/xesuzeeq/domains/askjconstruction.co.za/last-deployment.json.
-- Recoverable backup: /home/xesuzeeq/.trash/askj-20260928T220517Z. Do not restore development files to the public folder.
+- Recoverable backup: /home/xesuzeeq/.trash/askj-20260928T222755Z. Do not restore development files to the public folder.
 
 ## Production checks
 
@@ -32,4 +32,8 @@ Run live audits with AUDIT_BASE_URL=https://askjconstruction.co.za using audit_l
 
 ## Outstanding account checks
 
-Frikkadel login is required to inspect domain registration expiry and renewal settings. Public nameserver delegation is verified. No email DNS records were changed. The previous .com Wix domain is separate and was not redirected or modified.
+The user confirmed the domain was purchased through a friend’s registrar account; expiry and renewal settings must be verified there. Public nameserver delegation is verified. No email DNS records were changed. The previous .com Wix domain is separate and was not redirected or modified.
+
+## Favicon verification
+
+Restored the original Wix square favicon variants at assets/favicon-192.jpg, favicon-32.jpg and favicon-180.jpg. All seven pages declare correct JPEG MIME types and square dimensions. Live files return 200 and are allowed by robots.txt for Googlebot-Image. Google Search display still depends on recrawl and selection. No logo artwork was redesigned.
