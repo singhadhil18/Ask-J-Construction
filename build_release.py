@@ -1,6 +1,10 @@
 from pathlib import Path
-import re,urllib.parse,shutil,json,subprocess,datetime
-root=Path.cwd(); target=root/'.release-stage'
+import re,urllib.parse,shutil,json,subprocess,datetime,argparse
+parser=argparse.ArgumentParser()
+parser.add_argument('--output',default='.release-stage')
+args=parser.parse_args()
+root=Path.cwd().resolve(); target=(root/args.output).resolve()
+assert target != root and target.is_relative_to(root), 'Build output must stay within the workspace'
 assert not target.exists(),'Staging already exists; inspect before reusing'
 target.mkdir()
 files={p.name for p in root.glob('*.html')}|{'.htaccess','robots.txt','sitemap.xml','site-updates.css','mobile-compatibility.css','contact-form.js'}
