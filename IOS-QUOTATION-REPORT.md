@@ -1,7 +1,8 @@
 # iOS quotation spacing and delivery optimization
 
 29 September 2026. Local production preview: http://127.0.0.1:8001.
-These changes have not been deployed to the public website.
+Deployed to https://askjconstruction.co.za on 29 September 2026 at 05:46 UTC
+from main source b593d2d. See DEPLOYMENT.md for artifact and rollback details.
 
 ## Fix
 
@@ -66,4 +67,7 @@ header/footer separation and contact validation. WhatsApp launches are
 intercepted; no messages are sent.
 
 WebKit coverage is desktop emulation, not a physical iPhone or a particular
-iOS release. Public-site results should be verified after an authorized deployment.
+iOS release. Post-deployment live checks also passed in both engines. Live
+Lighthouse measured all 100s on Home in both profiles; Testimonials measured
+99 mobile Performance and 100 for its other categories and desktop profile.
+These single live measurements are separate from the local medians above.

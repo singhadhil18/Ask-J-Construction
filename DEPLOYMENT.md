@@ -6,11 +6,12 @@ Verified 29 September 2026 (South African time).
 - Registrar: Frikkadel. Public delegation uses ns1.server1.webhostmost.com, ns2.server2.webhostmost.com, ns3.server3.webhostmost.com and ns4.server4.webhostmost.com. Root and www resolve to 66.78.41.25.
 - Host: WebHostMost server5; account xesuzeeq; SSH port 2323 using the existing pinned host key and local identity. No credentials belong in this repository.
 - Web root: /home/xesuzeeq/domains/askjconstruction.co.za/public_html. private_html points to public_html.
-- Deployed source: 4e9f8c9 (favicon update).
-- Artifact commit: 7237f88baa56c92a39cfdc36618bf9dde18409f2.
+- Deployed source: b593d2d9ceca38d50dbb2611a886cb5a2a8277b8 (iOS quotation fix and static delivery optimization), merged and pushed to main.
+- Artifact commit: 351ffcc56c17d4850a1f8f8c26130f83d7807b31.
 - Separate release repository: /home/xesuzeeq/domains/askjconstruction.co.za/askj-release.git, branch release.
 - Receipt: /home/xesuzeeq/domains/askjconstruction.co.za/last-deployment.json.
-- Recoverable backup: /home/xesuzeeq/.trash/askj-20260928T222755Z. Do not restore development files to the public folder.
+- Recoverable backup: /home/xesuzeeq/.trash/askj-20260929T054640Z. Do not restore development files to the public folder.
+- Server staging: /home/xesuzeeq/domains/askjconstruction.co.za/stage-20260929T054640Z. All 274 installed production files matched the staged artifact by SHA-256; 9 replaced files were saved and 20 changed/new files installed. Older cached assets were retained.
 
 ## Production checks
 
@@ -20,7 +21,9 @@ HTML is gzip compressed (homepage approximately 190 KB to 30 KB). Fingerprinted 
 
 Google Search Console accepted https://askjconstruction.co.za/sitemap.xml with Success and 7 discovered pages. Discovery does not guarantee indexing or ranking. Evidence is in local audits/sitemap-success.png.
 
-Live Lighthouse: homepage mobile/desktop performance 99/99; contact 99/100. Both pages score 100 accessibility, best practices and SEO on both device profiles. These are live lab measurements, separate from localhost reports.
+Post-deployment Lighthouse 13.5.0: homepage mobile/desktop 100 in all four categories; testimonials mobile performance 99 and desktop performance 100, with 100 accessibility, best practices and SEO on both profiles. These are single live lab runs, separate from the localhost medians in IOS-QUOTATION-REPORT.md.
+
+The live quotation fix passed in WebKit 26.6 and Chromium 153 at 390 and 1440 pixels on Home and Testimonials: all 11 SVGs have nonzero height, phone text has at least 24px separation, and neither page overflows horizontally. Physical iPhone testing remains unverified.
 
 Live Chromium verification passed 32 checks: all seven pages at 320, 375, 768 and 1440 pixels, plus four contact-validation checks with outgoing messages intercepted. No horizontal overflow, broken images, header/footer overlap or page JavaScript errors were detected.
 
