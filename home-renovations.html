@@ -171,6 +171,40 @@
 </style><style data-source="site-updates.css">
 /* Keep the recovered navigation and quote action with the existing header. */
 .delivery-picture { display: contents; }
+/* Charcoal hover treatment, with the existing titles above the shading. */
+.interactive-tile { position: relative; isolation: isolate; }
+.interactive-tile > [data-mesh-id],
+.interactive-tile > p { position: relative; z-index: 3; }
+.interactive-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: rgba(34, 34, 34, .38);
+  box-shadow: inset 0 0 0 3px #222;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+/* Text-only service blocks need a lighter tint to retain dark-text contrast. */
+.interactive-tile.wixui-rich-text::after { background: rgba(34, 34, 34, .14); }
+@media (hover: hover) and (pointer: fine) {
+  .interactive-tile:hover::after { opacity: 1; }
+}
+.interactive-tile:has(a:focus-visible)::after { opacity: 1; }
+.interactive-tile a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+.interactive-tile:has(a:active)::after {
+  opacity: 1;
+  background: rgba(34, 34, 34, .50);
+  box-shadow: inset 0 0 0 3px #222;
+}
+.interactive-tile.wixui-rich-text:has(a:active)::after { background: rgba(34, 34, 34, .24); }
+@media (prefers-reduced-motion: reduce) {
+  .interactive-tile::after { transition: none; }
+}
 /* Include the footer link in document flow instead of overflowing a 100% page wrapper. */
 #PAGES_CONTAINER { display: flex; flex-direction: column; }
 #SITE_PAGES { height: auto !important; flex: 0 0 auto; }
@@ -228,7 +262,7 @@
   gap: 12px;
 }
 #SITE_HEADER .header-quote {
-  position: static;
+  position: relative;
   justify-self: start;
   z-index: 100;
   display: inline-flex;
@@ -245,12 +279,70 @@
 /* Original 259 x 165 logo framing, using the original site's 2x asset. */
 .header-logo img { display: block; width: 259px; height: 165px; object-fit: contain; }
 .header-quote:hover { background: #444; }
+.header-quote::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 8px;
+  height: 2px;
+  background: currentColor;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .header-quote:hover::after { transform: scaleX(1); }
+}
+.header-quote:focus-visible::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .header-quote::after { transition: none; }
+}
 .header-quote:focus-visible,
 .recovered-nav a:focus-visible { outline: 2px solid #222; outline-offset: 4px; }
 /* Services remain ordinary links, with an optional accessible disclosure. */
 .services-navigation { position: relative; }
 .nav-js .services-navigation:not(.enhanced) .services-submenu { display: none; }
 .services-trigger { display: flex; align-items: center; }
+/* Rectangular navigation tiles without changing link spacing or header size. */
+#SITE_HEADER .recovered-nav > a,
+#SITE_HEADER .services-trigger > a {
+  position: relative;
+  isolation: isolate;
+  transition: color 150ms ease;
+}
+#SITE_HEADER .recovered-nav > a::before,
+#SITE_HEADER .services-trigger > a::before {
+  content: "";
+  position: absolute;
+  inset: -8px -5px;
+  z-index: -1;
+  background: #666;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  #SITE_HEADER .recovered-nav > a:hover,
+  #SITE_HEADER .services-trigger > a:hover { color: #fff; }
+  #SITE_HEADER .recovered-nav > a:hover::before,
+  #SITE_HEADER .services-trigger > a:hover::before { opacity: 1; }
+}
+#SITE_HEADER .recovered-nav > a:is(:focus-visible, :active),
+#SITE_HEADER .services-trigger > a:is(:focus-visible, :active) { color: #fff; }
+#SITE_HEADER .recovered-nav > a:is(:focus-visible, :active)::before,
+#SITE_HEADER .services-trigger > a:is(:focus-visible, :active)::before { opacity: 1; }
+@media (max-width: 979px) {
+  #SITE_HEADER .recovered-nav > a::before,
+  #SITE_HEADER .services-trigger > a::before { inset: 0 -3px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #SITE_HEADER .recovered-nav > a,
+  #SITE_HEADER .services-trigger > a,
+  #SITE_HEADER .recovered-nav > a::before,
+  #SITE_HEADER .services-trigger > a::before { transition: none; }
+}
 .services-submenu[hidden] { display: none !important; }
 .site-socials a:focus-visible { outline: 2px solid #222; outline-offset: 2px; }
 .services-submenu { list-style: none; margin: 0; padding: 8px 0; background: white; border: 1px solid #ddd; width: 310px; max-width: calc(100vw - 32px); text-align: left; }
@@ -324,6 +416,7 @@ html:not(.nav-js) #SITE_HEADER:has(.services-navigation:not(.enhanced)) { height
     gap: 8px 12px;
   }
   #SITE_HEADER .header-quote { padding: 0 12px; font-size: 13px; }
+  .header-quote::after { left: 12px; right: 12px; }
   .local-answers { max-width: 100vw; margin-left: 0; padding: 40px 20px; }
   .local-answers h1 { font-size: 30px; }
 }
@@ -458,7 +551,7 @@ html:not(.nav-js) #SITE_HEADER:has(.services-navigation:not(.enhanced)) { height
 <link rel="icon" type="image/jpeg" sizes="192x192" href="assets/favicon-192.jpg">
 <link rel="icon" type="image/jpeg" sizes="32x32" href="assets/favicon-32.jpg">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.jpg">
-<meta name="description" content="Home renovation and addition enquiries in Durban, Umhlanga and the North Coast. Discuss your existing space, scope and next steps with ASKJ Construction."><meta property="og:title" content="Home Renovations &amp; Additions Durban | ASKJ"><meta property="og:description" content="Home renovation and addition enquiries in Durban, Umhlanga and the North Coast. Discuss your existing space, scope and next steps with ASKJ Construction."><meta property="og:url" content="https://askjconstruction.co.za/home-renovations.html"><script defer src="assets/site-navigation.js?v=a5c3a5db9816"></script>
+<meta name="description" content="Home renovation and addition enquiries in Durban, Umhlanga and the North Coast. Discuss your existing space, scope and next steps with ASKJ Construction."><meta property="og:title" content="Home Renovations &amp; Additions Durban | ASKJ"><meta property="og:description" content="Home renovation and addition enquiries in Durban, Umhlanga and the North Coast. Discuss your existing space, scope and next steps with ASKJ Construction."><meta property="og:url" content="https://askjconstruction.co.za/home-renovations.html"><script defer src="assets/site-navigation.js?v=d4c0bf43da96"></script>
 </head>
 <body class='' >
 
