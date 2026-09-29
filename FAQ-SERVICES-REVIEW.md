@@ -1,3 +1,7 @@
+> Deployment update: this reviewed work was merged to main and deployed on
+> 29 September 2026. See DEPLOYMENT.md for the current release and live checks.
+> Earlier review-only statements below describe the pre-deployment workflow.
+
 # FAQ, services and image clarity review
 
 29 September 2026. Review branch: `codex/2026-09-29-faq-services-images`.

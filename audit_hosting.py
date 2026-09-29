@@ -1,6 +1,6 @@
 import urllib.request,urllib.error,json,xml.etree.ElementTree as ET
 base='https://askjconstruction.co.za'
-for path in ['/','/about.html','/services.html','/projects.html','/contact.html','/customer-testimonials.html','/service-areas-faq.html','/sitemap.xml','/robots.txt','/release.json','/.git/HEAD','/README.md','/.qa-tools/package.json','/audits/','/not-a-real-page-93842']:
+for path in ['/','/about.html','/services.html','/projects.html','/contact.html','/customer-testimonials.html','/service-areas-faq.html','/luxury-home-builds.html','/home-renovations.html','/frameless-showers.html','/sitemap.xml','/robots.txt','/release.json','/.git/HEAD','/README.md','/.qa-tools/package.json','/audits/','/not-a-real-page-93842']:
  try:
   with urllib.request.urlopen(base+path,timeout=15) as r:
    data=r.read();print(path,r.status,r.headers.get('Content-Type'),len(data))

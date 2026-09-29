@@ -1,5 +1,69 @@
 # ASKJ production hosting
 
+## Current release — 29 September 2026, 08:52 UTC
+
+- Live URL: https://askjconstruction.co.za/
+- Source merged and pushed to main: `f794341a74a5ec87732543d511e043b971014ac8`.
+- Built-site artifact: `2f3a5599da22f75f8aa281f7fef322e6b730ffc5`.
+- Web root: `/home/xesuzeeq/domains/askjconstruction.co.za/public_html`.
+- Stage: `/home/xesuzeeq/domains/askjconstruction.co.za/stage-20260929T085230Z`.
+- Receipt: `/home/xesuzeeq/domains/askjconstruction.co.za/last-deployment.json`.
+- NEW recovery folder: `/home/xesuzeeq/.trash/askj-20260929T085230Z`.
+  Contains 12 replaced files, 1,890,322 bytes plus receipt. The earlier deleted
+  rollback folders are still unavailable. No old recovery folder was restored.
+- Verified all 545 production artifact files by SHA-256 after installation;
+  283 changed/new files installed. Existing cached assets retained deliberately.
+  No unrelated files, verification files, domain configuration or .well-known
+  were removed. No confirmed obsolete source files remained in this web root.
+
+All ten pages, sitemap, robots and release receipt return HTTP 200. New service
+extensionless routes redirect correctly. Canonical HTTP/www/index redirects
+work; unknown paths return 404, repository/audit paths remain denied. AVIF
+images have the right MIME type and one-year immutable caching. Versioned
+navigation JavaScript revalidates. Homepage service cards link to their pages.
+
+Live browser validation: 88 page/contact checks in Chromium and WebKit,
+plus 28 actual service-link navigations with mouse and touch. No enquiries sent.
+The three portrait photographs and centred text were visually checked live.
+
+Live Lighthouse (single runs):
+
+| Page | Mobile Performance | Desktop Performance | Accessibility / Best Practices / SEO |
+| --- | ---: | ---: | --- |
+| Home | 99 | 100 | 100 / 100 / 100 |
+| Services | 97 | 100 | 100 / 100 / 100 |
+| FAQs | 100 | 100 | 100 / 100 / 100 |
+| Luxury home builds | 98 | 100 | 100 / 100 / 100 |
+| Home renovations | 98 | 100 | 100 / 100 / 100 |
+| Frameless showers | 100 | 100 | 100 / 100 / 100 |
+
+Homepage live LCP: 1.9s mobile, 0.6s desktop. Raw live reports use suffix
+`-release-current` under ignored audits/. Physical phone testing is unverified.
+
+Google Search Console: verified domain property accessible in browser. Updated
+sitemap submitted successfully, status Success, **10 discovered pages**.
+All ten sitemap entries have accurate modification dates and canonical URLs.
+Google accepted individual indexing requests for luxury-home-builds.html,
+home-renovations.html and frameless-showers.html after live URL checks. All
+three were added to the priority crawl queue. Before submission they were
+reported as unknown/not indexed. Discovery and indexing requests are not a
+guarantee of indexing or ranking.
+
+### Homepage indexing qualification
+
+Google's historical crawl dated 28 September 2026 still classified the homepage
+as an alternative page with canonical https://www.askjconstruction.com/.
+A fresh Search Console live test on 29 September at 10:59 SAST confirmed
+successful smartphone fetching, crawl/indexing allowed, "Page can be indexed",
+and user-declared canonical https://askjconstruction.co.za/. All ten live
+pages independently passed self-canonical/no-noindex checks. The historical
+index record has not yet updated; do not claim the homepage is already indexed.
+Google accepted the homepage indexing request and added it to the priority
+crawl queue after the successful live test.
+
+## Previous release records (historical, superseded above)
+
+
 Verified 29 September 2026 (South African time).
 
 - Canonical site: https://askjconstruction.co.za/
