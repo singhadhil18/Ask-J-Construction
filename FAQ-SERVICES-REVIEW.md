@@ -148,3 +148,11 @@ Reproduce with `audit_site_update.cjs`, `audit_hover_path.cjs`,
 Raw Lighthouse reports use the `-hover-audit` suffix under ignored `audits/`;
 the final homepage recheck uses `-hover-final`.
 This remains a review-branch update, not a merge or WebHostMost deployment.
+
+### Hover switching refinement
+
+Hovering any other top-level navigation heading now collapses Services, even
+when Services retains keyboard focus. Moving through empty ribbon space or
+into the submenu keeps it reachable; crossing another heading intentionally
+closes it. Verified at 320, 390, 905 and 1440px in Chromium and WebKit,
+including reopening and all seven service destinations with mouse and touch.

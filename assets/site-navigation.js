@@ -42,10 +42,17 @@
   group.addEventListener('pointerenter', () => {
     if (desktop.matches && !dismissed) setOpen(true);
   });
+  navigation.querySelectorAll(':scope > a').forEach(item => {
+    item.addEventListener('pointerenter', () => {
+      if (!desktop.matches) return;
+      dismissed = false;
+      setOpen(false);
+    });
+  });
   const leaveNavigation = event => {
     if (!desktop.matches) return;
     // A wrapped ribbon places the in-flow submenu below other navigation links.
-    // Keep it open while the pointer crosses that ribbon to reach the submenu.
+    // Keep it open over gaps; entering another navigation link closes it.
     if (innerWidth < 980 && navigation.contains(event.relatedTarget)) return;
     dismissed = false;
     if (!group.contains(document.activeElement)) setOpen(false);
