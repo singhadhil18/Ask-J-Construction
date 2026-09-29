@@ -26,10 +26,12 @@ const capture=process.argv.includes('--capture');
      const source=inventory.find(r=>r.page===name+'.html'&&r.original===image.src);
      if(source&&!capture) {
       assert(image.loaded,`Broken image ${image.src}`);
-      const selected=Number(image.selected.match(/-sharp-(\d+)\./)?.[1]);
-      const displayed=image.fit==='cover'?Math.max(image.width,image.height*source.originalWidth/source.originalHeight):image.width;
-      image.required=Math.min(source.originalWidth,Math.ceil(displayed*2));image.selectedWidth=selected;
-      image.originalLimited=displayed*2>source.originalWidth;
+      const crop=image.selected.match(/-mobile-(portrait|square)-[a-f0-9]+-(\d+)\./);
+      const sourceWidth=crop?(crop[1]==='portrait'?768:1024):source.originalWidth;
+      const selected=Number(crop?crop[2]:image.selected.match(/-sharp-(\d+)\./)?.[1]);
+      const displayed=image.fit==='cover'?Math.max(image.width,image.height*sourceWidth/source.originalHeight):image.width;
+      image.required=Math.min(sourceWidth,Math.ceil(displayed*2));image.selectedWidth=selected;
+      image.originalLimited=displayed*2>sourceWidth;
       assert(selected>=image.required-2,`${name} ${width} ${image.src}: ${selected} < ${image.required}`);
      }
     }
@@ -41,7 +43,7 @@ const capture=process.argv.includes('--capture');
      if(stem) {
       // Chromium can reuse a larger cached source after a responsive preload.
       // Only positive transfers represent another network download.
-      const downloads=await page.evaluate(stem=>performance.getEntriesByType('resource').filter(r=>r.name.includes(stem+'-sharp-')&&r.transferSize>0).map(r=>r.name),stem);
+      const downloads=await page.evaluate(stem=>performance.getEntriesByType('resource').filter(r=>r.name.includes(stem+'-')&&r.transferSize>0).map(r=>r.name),stem);
       assert(new Set(downloads).size<=1,`${name}: duplicate hero downloads: ${downloads.join(', ')}`);
      }
     }

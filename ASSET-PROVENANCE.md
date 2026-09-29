@@ -28,3 +28,12 @@ Derivatives use AVIF quality 75 and WebP quality 90, capped at native resolution
 Responsive selection accounts for cover-crop height as well as container width.
 Original resolution can still limit detail on high-density screens, especially
 where a landscape image fills a tall portrait section.
+
+## Mobile homepage variants
+
+`build_mobile_images.py` derives the `bf404cfad15b1903aa04-mobile-*` AVIF/WebP
+files directly from recovered original `bf404cfad15b1903aa04.png`, retaining
+the full source height and centred portrait/square region. No invented pixels
+or upscaling. The additional `fc641aaae36b1fb35c75-sharp-672.*` files come
+from the corresponding original JPEG. Existing layout and visible crops stay
+unchanged; AVIF q75 / WebP q90 match the sharp image generation settings.

@@ -177,3 +177,33 @@ service-page, navigation and WhatsApp additions are retained.
 portrait shape, centred labels and overflow at ten widths in two engines.
 Do not introduce further layout changes without identifying them to the user
 and obtaining their decision first. Changes remain on the review branch.
+
+### Mobile image delivery
+
+Added centred portrait (768x1024) and square (1024x1024) crops of the original
+1536x1024 homepage hero. They preserve the entire source height and remove
+only horizontally hidden pixels. Aspect-ratio media conditions preserve the
+current composition; landscape and desktop retain the original full image.
+The page layout, typography and service-card arrangement are unchanged.
+
+AVIF quality remains 75 and WebP quality remains 90. The full-resolution
+portrait AVIF is 81,756 bytes versus 179,772 bytes for the full image (54.5%
+smaller). A 672px derivative fills the sizing gap for the first below-fold
+photograph. Sources and conditional preloads match, with no duplicate hero
+transfers in the tested profiles. Full-image fallback remains available.
+
+Run `python build_mobile_images.py` after image regeneration. The generator
+is idempotent. All new assets are automatically included by build_release.py's
+reference scan. Existing cached assets are retained.
+
+Verification: 66 fixed Chromium/WebKit profiles spanning portrait, landscape,
+phone, tablet and desktop at DPR 1/2/3; WebP with JavaScript disabled in both
+engines; unchanged hero geometry and before/after visual inspection; service
+card layout checks. These simulate Android/iOS browser conditions; physical
+phones were not used. Portrait-to-landscape-to-portrait switching also passed
+in both engines. Raw reports are in ignored audits/.
+
+Corrected-build Lighthouse (two runs): mobile 98–99 Performance, 100 Accessibility,
+100 Best Practices, 100 SEO; LCP 2.3–2.4s. Desktop 100 in all categories, LCP 0.7s. Scores
+are local measurements and may vary. Earlier failed generator-run reports
+are diagnostic only, not release results. No deployment was performed.
