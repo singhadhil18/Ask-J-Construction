@@ -173,6 +173,40 @@
 </style><style data-source="site-updates.css">
 /* Keep the recovered navigation and quote action with the existing header. */
 .delivery-picture { display: contents; }
+/* Standalone testimonial form, replacing the inactive recovered Wix widget. */
+#comp-mm7tceqb.testimonial-section { min-width: 0; padding: 48px 20px; box-sizing: border-box; }
+.testimonial-pane { max-width: 680px; margin: auto; padding: 40px; box-sizing: border-box; background: #f5f5f5; border: 1px solid #ddd; overflow: hidden; font: 15px/1.6 Arial, sans-serif; color: #222; }
+.testimonial-pane [hidden] { display: none !important; }
+.testimonial-pane h2 { font: 28px/1.3 poppins-semibold, poppins, sans-serif; margin: 0 0 12px; }
+.review-intro { margin-bottom: 28px; }
+.review-preview-note { padding: 12px 16px; margin: 0 0 24px; border-left: 3px solid #777; background: #e8e8e8; }
+#testimonial-form > label, .review-name-row > label { display: block; margin-bottom: 22px; }
+.review-name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+#testimonial-form input:not([type=radio]):not([type=checkbox]):not([type=hidden]),
+#testimonial-form textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 6px; padding: 12px; border: 1px solid #777; border-radius: 0; background: white; color: #222; font: inherit; }
+#testimonial-form textarea { resize: vertical; min-height: 130px; }
+#testimonial-form :is(input, textarea, button):focus-visible { outline: 2px solid #222; outline-offset: 3px; }
+.review-rating { border: 0; padding: 0; margin: 0 0 22px; }
+.review-stars { display: flex; gap: 2px; margin-top: 6px; }
+.review-star { position: relative; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; cursor: pointer; }
+.review-star input { position: absolute; width: 100%; height: 100%; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.review-star span { font-size: 34px; line-height: 1; color: #aaa; pointer-events: none; }
+.review-star.is-selected span { color: #ad621b; }
+.review-star:has(input:focus-visible) { outline: 2px solid #222; outline-offset: 2px; }
+.review-rating-note, .review-privacy { font-size: 13px; color: #555; }
+#testimonial-form .review-consent { display: flex; align-items: flex-start; gap: 10px; }
+.review-consent input { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; accent-color: #222; }
+.review-submit { display: block; margin-top: 24px; min-height: 44px; padding: 10px 32px; background: #222; color: white; border: 0; font: inherit; cursor: pointer; }
+.review-submit:hover { background: #666; }
+.review-submit:disabled { opacity: .65; cursor: wait; }
+.review-error { margin-top: 18px; color: #a11c1c; }
+.review-success { text-align: center; padding: 20px 0; }
+.review-success:focus { outline: 0; }
+.review-success-mark { display: block; font-size: 40px; margin-bottom: 14px; }
+@media (max-width: 600px) {
+  .testimonial-pane { padding: 28px 20px; }
+  .review-name-row { grid-template-columns: 1fr; gap: 0; }
+}
 /* Charcoal hover treatment, with the existing titles above the shading. */
 .interactive-tile { position: relative; isolation: isolate; }
 .interactive-tile > [data-mesh-id],
