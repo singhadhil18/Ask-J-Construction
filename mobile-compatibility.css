@@ -47,6 +47,9 @@
     top: auto !important;
     margin: 0 !important;
     align-self: stretch !important;
+  }
+  /* Absolutely positioned SVG artwork needs its original box to reserve space. */
+  #PAGES_CONTAINER [data-mesh-id$="-gridContainer"] > [id]:not(.wixui-vector-image) {
     width: auto !important;
     height: auto !important;
   }
