@@ -420,6 +420,11 @@ html:not(.nav-js) #SITE_HEADER:has(.services-navigation:not(.enhanced)) { height
   #comp-kbae5tti [data-mesh-id$="-gridContainer"] { padding: 36px 16px; }
   #comp-jnod9lp56, #comp-jnod9lp58, #comp-jnod9lp510 { min-height: 380px !important; }
   #comp-jnod9lp56 a, #comp-jnod9lp58 a, #comp-jnod9lp510 a { min-height: 380px !important; }
+  /* Preserve centred labels over the homepage service photographs. */
+  #PAGES_CONTAINER #comp-jnod9lp55 [data-mesh-id$="-gridContainer"] {
+    min-height: 380px !important;
+    justify-content: center;
+  }
   #SITE_FOOTER [data-mesh-id$="-gridContainer"] {
     display: flex !important;
     flex-wrap: wrap;
@@ -434,6 +439,16 @@ html:not(.nav-js) #SITE_HEADER:has(.services-navigation:not(.enhanced)) { height
   form input, form textarea, form select { font-size: 16px !important; }
   form fieldset { min-width: 0; }
   .local-answers { width: 100%; max-width: 100%; padding: 40px 20px; }
+}
+/* Keep the original three portrait cards across in tablet/narrow browser views. */
+@media (min-width: 768px) and (max-width: 979px) {
+  #PAGES_CONTAINER #comp-jnod9lp55 [data-testid="columns"] {
+    flex-direction: row !important;
+  }
+  #PAGES_CONTAINER #comp-jnod9lp55 .wixui-column-strip__column {
+    flex: 1 1 0 !important;
+    width: 0 !important;
+  }
 }
 @media (max-width: 360px) {
   #SITE_HEADER {

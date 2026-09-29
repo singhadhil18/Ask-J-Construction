@@ -156,3 +156,24 @@ when Services retains keyboard focus. Moving through empty ribbon space or
 into the submenu keeps it reachable; crossing another heading intentionally
 closes it. Verified at 320, 390, 905 and 1440px in Chromium and WebKit,
 including reopening and all seven service destinations with mouse and touch.
+
+### Layout preservation review
+
+Compared the six existing non-FAQ page bodies with release `c6eb4f1` at
+390, 905, 1440 and 1920px after decoding all images. Before this refinement,
+all measured component rectangles, inherited fonts and colours matched.
+The perceived homepage reformatting came from the older below-980px stacking
+rule, not from the sharper images. The previous suggestion that an image
+quality change had redesigned the cards was not supported by this comparison.
+
+At the user's request, restore the homepage's three portrait service cards
+across at 768–979px and centre their overlaid labels. Phones below 768px stay
+stacked, as explicitly chosen by the user. Desktop 980px and wider is unchanged.
+The non-homepage existing page bodies remain unchanged. The approved FAQ,
+service-page, navigation and WhatsApp additions are retained.
+
+`audit_layout_preservation.cjs` compares the baseline body geometry;
+`audit_service_layout.cjs` checks loaded photographs, row/stack behaviour,
+portrait shape, centred labels and overflow at ten widths in two engines.
+Do not introduce further layout changes without identifying them to the user
+and obtaining their decision first. Changes remain on the review branch.
