@@ -2,6 +2,7 @@
   const group = document.querySelector('.services-navigation');
   if (!group) return;
   const toggle = group.querySelector('button');
+  const link = group.querySelector('.services-trigger > a');
   const panel = group.querySelector('.services-submenu');
   const desktop = matchMedia('(min-width: 980px) and (hover: hover)');
   let dismissed = false;
@@ -14,8 +15,20 @@
   const setOpen = open => {
     panel.hidden = !open;
     toggle.setAttribute('aria-expanded', String(open));
+    link.setAttribute('aria-expanded', String(open));
   };
-  toggle.hidden = false;
+  const syncTrigger = () => {
+    toggle.hidden = desktop.matches;
+    link.hidden = !desktop.matches;
+  };
+  link.setAttribute('aria-controls', panel.id);
+  syncTrigger();
+  link.addEventListener('keydown', event => {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault(); dismissed = false; setOpen(true);
+      panel.querySelector('a').focus();
+    }
+  });
   group.classList.add('enhanced');
   setOpen(false);
   toggle.addEventListener('click', () => {
@@ -40,7 +53,7 @@
   });
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !panel.hidden) {
-      dismissed = true; setOpen(false); toggle.focus();
+      dismissed = true; setOpen(false); (desktop.matches ? link : toggle).focus();
     }
   });
   document.addEventListener('click', event => {
@@ -48,5 +61,5 @@
   });
   // Leave clicked links present until the browser follows them, including Safari.
   window.addEventListener('hashchange', () => setOpen(false));
-  desktop.addEventListener('change', () => { setOpen(false); dismissed = false; });
+  desktop.addEventListener('change', () => { syncTrigger(); setOpen(false); dismissed = false; });
 })();

@@ -79,10 +79,9 @@
 /* Services remain ordinary links, with an optional accessible disclosure. */
 .services-navigation { position: relative; }
 .nav-js .services-navigation:not(.enhanced) .services-submenu { display: none; }
-.nav-js .services-navigation:not(.enhanced) .services-trigger::after { content: ""; display: block; width: 28px; height: 44px; }
 .services-trigger { display: flex; align-items: center; }
-.services-trigger button { border: 0; padding: 0; background: transparent; color: #222; cursor: pointer; width: 28px; min-height: 44px; touch-action: manipulation; }
-.services-trigger button[hidden], .services-submenu[hidden] { display: none !important; }
+.services-trigger button { border: 0; padding: 0; background: transparent; color: #222; cursor: pointer; font: inherit; min-height: 44px; touch-action: manipulation; }
+.services-trigger > a[hidden], .services-trigger button[hidden], .services-submenu[hidden] { display: none !important; }
 .services-trigger button:focus-visible, .site-socials a:focus-visible { outline: 2px solid #222; outline-offset: 2px; }
 .services-submenu { list-style: none; margin: 0; padding: 8px 0; background: white; border: 1px solid #ddd; width: 310px; max-width: calc(100vw - 32px); text-align: left; }
 .services-navigation.enhanced .services-submenu { position: absolute; top: 100%; right: 0; z-index: 1001; }
@@ -104,8 +103,6 @@ html:not(.nav-js) #SITE_HEADER:has(.services-navigation:not(.enhanced)) { height
 .service-section-anchor { display: block; scroll-margin-top: 220px; }
 @media (max-width: 979px) {
   .services-navigation { display: contents; }
-  .services-trigger button { width: 44px; }
-  .nav-js .services-navigation:not(.enhanced) .services-trigger::after { width: 44px; }
   #SITE_HEADER .services-submenu { position: static; order: 10; flex: 0 0 100%; width: 100%; max-width: 100%; box-sizing: border-box; max-height: 42vh; overflow-y: auto; }
   .service-section-anchor { scroll-margin-top: 280px; }
 }

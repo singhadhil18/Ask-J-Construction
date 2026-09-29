@@ -15,7 +15,7 @@ SERVICES = [
 nav = '<nav class="recovered-nav" aria-label="Main navigation">'
 for href, label in [('index.html','Home'),('about.html','About'),('services.html','Services'),('projects.html','Projects'),('customer-testimonials.html','Testimonials'),('service-areas-faq.html','FAQs'),('contact.html','Contact')]:
     if label == 'Services':
-        nav += '<div class="services-navigation"><div class="services-trigger"><a href="services.html">Services</a><button hidden type="button" aria-label="Toggle services submenu" aria-controls="services-submenu" aria-expanded="false"><svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></div><ul id="services-submenu" class="services-submenu">'
+        nav += '<div class="services-navigation"><div class="services-trigger"><a href="services.html">Services</a><button hidden type="button" aria-label="Toggle services submenu" aria-controls="services-submenu" aria-expanded="false">Services</button></div><ul id="services-submenu" class="services-submenu">'
         nav += ''.join(f'<li><a href="{url}">{name}</a></li>' for url,name in SERVICES)
         nav += '</ul></div>'
     else:

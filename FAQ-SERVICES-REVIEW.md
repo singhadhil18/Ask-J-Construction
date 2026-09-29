@@ -6,8 +6,9 @@ Local preview: http://127.0.0.1:8003. This update is not merged or deployed.
 ## What changed
 
 - FAQs now appears immediately before Contact in the header on all ten pages.
-- Services has a separate disclosure button and seven submenu links. The
-  Services text remains a normal link. Hover, keyboard, touch, Escape and
+- Services has no dropdown arrow. On desktop its text link opens seven submenu
+  links on hover or keyboard focus; on phones a matching Services text button
+  opens the submenu, with See all services linking to the overview. Escape and
   outside-click dismissal are supported. Links remain available without JS.
 - New pages cover luxury home builds, home renovations and additions, and
   frameless showers and maintenance. Each has its own metadata, breadcrumb,

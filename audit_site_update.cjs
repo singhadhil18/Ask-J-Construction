@@ -16,13 +16,14 @@ const results=[];
      await page.evaluate(()=>document.fonts.ready);
      assert.equal(await page.locator('.recovered-nav > a, .services-trigger > a').count(),7);
      assert.deepEqual(await page.locator('.recovered-nav > a').allTextContents(),['Home','About','Projects','Testimonials','FAQs','Contact']);
-     const toggle=page.getByRole('button',{name:'Toggle services submenu'}), panel=page.locator('#services-submenu');
+     const toggle=width>=980?page.locator('.services-trigger > a'):page.getByRole('button',{name:'Toggle services submenu'}), panel=page.locator('#services-submenu');
+     assert.equal(await page.locator('.services-trigger svg').count(),0);
      assert.equal(await panel.isVisible(),false);
      if(width<768) {
       await toggle.tap();assert.equal(await panel.isVisible(),true);
       await toggle.tap();assert.equal(await panel.isVisible(),false);
      }
-     await toggle.focus();await page.keyboard.press('Enter');assert.equal(await panel.isVisible(),true);
+     await toggle.focus();await page.keyboard.press(width>=980?'ArrowDown':'Enter');assert.equal(await panel.isVisible(),true);
      assert.equal(await toggle.getAttribute('aria-expanded'),'true');
      assert.equal(await panel.locator('a').count(),7);
      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Open menu overflows');
