@@ -7,9 +7,9 @@ const modules = process.env.LIGHTHOUSE_MODULES || 'C:/Users/Adhil.Singh/AppData/
 const {default: lighthouse} = await import(pathToFileURL(path.join(modules, 'lighthouse/core/index.js')));
 const launcher = await import(pathToFileURL(path.join(modules, 'chrome-launcher/dist/index.js')));
 const pages = process.argv.slice(2);
-const names = pages.length ? pages : ['index', 'about', 'services', 'projects', 'customer-testimonials', 'contact', 'service-areas-faq'];
+const names = pages.length ? pages : ['index', 'about', 'services', 'projects', 'customer-testimonials', 'contact', 'service-areas-faq', 'luxury-home-builds', 'home-renovations', 'frameless-showers'];
 const baseUrl = (process.env.AUDIT_BASE_URL || 'http://127.0.0.1:8001').replace(/\/$/, '');
-const reportPrefix = process.env.AUDIT_BASE_URL ? 'live-' : '';
+const reportPrefix = /^https:\/\//.test(baseUrl) ? 'live-' : '';
 const reportSuffix = process.env.AUDIT_REPORT_SUFFIX || '';
 await fs.mkdir('audits', {recursive: true});
 const chrome = await launcher.launch({chromeFlags: ['--headless', '--disable-gpu']});

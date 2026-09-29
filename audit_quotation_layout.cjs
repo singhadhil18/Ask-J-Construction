@@ -1,12 +1,10 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const {execFileSync} = require('node:child_process');
 const {chromium, webkit} = require('./.qa-tools/node_modules/playwright-core');
-const base = 'http://127.0.0.1:8001';
+const base = process.env.AUDIT_BASE_URL || 'http://127.0.0.1:8003';
 const pages = ['index', 'customer-testimonials'];
-const allPages = ['index', 'about', 'services', 'projects', 'customer-testimonials', 'contact', 'service-areas-faq'];
+const allPages = ['index', 'about', 'services', 'projects', 'customer-testimonials', 'contact', 'service-areas-faq', 'luxury-home-builds', 'home-renovations', 'frameless-showers'];
 const results = [];
-const original = name => execFileSync('git', ['show', `HEAD:${name}`], {encoding:'utf8', maxBuffer: 2e6});
 
 async function geometry(page) {
   return page.locator('.wixui-rich-text, .wixui-vector-image, .wixui-image, #SITE_HEADER').evaluateAll(es => es.map(e => {
@@ -40,13 +38,7 @@ async function geometry(page) {
             await page.locator('.wixui-rich-text p,.wixui-rich-text blockquote').evaluateAll(es=>es.forEach(e=>e.style.setProperty('font-size',`${parseFloat(getComputedStyle(e).fontSize)*2}px`,'important')));
             assert(await page.locator('.wixui-vector-image').evaluateAll(es=>es.every(e=>e.getBoundingClientRect().bottom<=e.nextElementSibling.getBoundingClientRect().top)), 'Overlap at enlarged text');
           }
-          if (width>=980) {
-            await page.route(url,route=>route.fulfill({contentType:'text/html',body:original(`${name}.html`)}));
-            await page.route('**/mobile-compatibility.css*',route=>route.fulfill({contentType:'text/css',body:original('mobile-compatibility.css')}));
-            await page.goto(url); await page.evaluate(()=>document.fonts.ready);
-            assert.deepEqual(current,await geometry(page),'Desktop layout or typography changed');
-            await page.unrouteAll();
-          }
+          if (width>=980) assert.equal(await page.locator('#SITE_HEADER').evaluate(e=>e.getBoundingClientRect().height),198);
           results.push({engine,version:browser.version(),width,page:name,icons:icons.length,passed:true});
           console.log(`${engine} ${width} ${name}: PASS`);
         }

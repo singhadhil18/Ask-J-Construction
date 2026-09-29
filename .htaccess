@@ -10,7 +10,7 @@ DirectoryIndex index.html
   RewriteRule ^ https://askjconstruction.co.za%{REQUEST_URI} [R=301,L]
   RewriteCond %{THE_REQUEST} \s/+index\.html[?\s] [NC]
   RewriteRule ^index\.html$ https://askjconstruction.co.za/ [R=301,L]
-  RewriteRule ^(about|services|projects|customer-testimonials|contact|service-areas-faq)/?$ /$1.html [R=301,L]
+  RewriteRule ^(about|services|projects|customer-testimonials|contact|service-areas-faq|luxury-home-builds|home-renovations|frameless-showers)/?$ /$1.html [R=301,L]
   # Defence in depth if a source checkout is accidentally uploaded again.
   RewriteRule (^|/)(\.git|\.qa-tools|\.qa-firefox|audits|recovered-original|__pycache__)(/|$) - [F,L]
 </IfModule>

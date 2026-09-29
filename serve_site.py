@@ -8,7 +8,7 @@ import argparse
 ROOT = Path(__file__).resolve().parent
 PUBLIC_FILES = {
     'index.html', 'about.html', 'services.html', 'projects.html',
-    'customer-testimonials.html', 'contact.html', 'service-areas-faq.html',
+    'customer-testimonials.html', 'contact.html', 'service-areas-faq.html', 'luxury-home-builds.html', 'home-renovations.html', 'frameless-showers.html',
     'site-updates.css', 'mobile-compatibility.css', 'contact-form.js',
     'robots.txt', 'sitemap.xml',
 }

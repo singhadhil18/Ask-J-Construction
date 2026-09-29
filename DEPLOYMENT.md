@@ -10,7 +10,7 @@ Verified 29 September 2026 (South African time).
 - Artifact commit: 351ffcc56c17d4850a1f8f8c26130f83d7807b31.
 - Separate release repository: /home/xesuzeeq/domains/askjconstruction.co.za/askj-release.git, branch release.
 - Receipt: /home/xesuzeeq/domains/askjconstruction.co.za/last-deployment.json.
-- Recoverable backup: /home/xesuzeeq/.trash/askj-20260929T054640Z. Do not restore development files to the public folder.
+- Rollback status: all three ASKJ Trash rollback folders were permanently deleted on 29 September 2026 at the user's request. The previous receipt's rollback path is historical and no longer available. Staging folders and release Git history remain; they are not a verified file-for-file rollback of the hosting account.
 - Server staging: /home/xesuzeeq/domains/askjconstruction.co.za/stage-20260929T054640Z. All 274 installed production files matched the staged artifact by SHA-256; 9 replaced files were saved and 20 changed/new files installed. Older cached assets were retained.
 
 ## Production checks

@@ -3,6 +3,8 @@
 29 September 2026. Local production preview: http://127.0.0.1:8001.
 Deployed to https://askjconstruction.co.za on 29 September 2026 at 05:46 UTC
 from main source b593d2d. See DEPLOYMENT.md for artifact and rollback details.
+The user subsequently requested deletion of all ASKJ Trash rollback folders.
+Those folders are no longer available.
 
 ## Fix
 
