@@ -1,6 +1,7 @@
 """Synchronise the static header navigation and footer social links on all pages."""
 from pathlib import Path
 import re
+import hashlib
 
 ROOT = Path(__file__).resolve().parent
 SERVICES = [
@@ -15,7 +16,7 @@ SERVICES = [
 nav = '<nav class="recovered-nav" aria-label="Main navigation">'
 for href, label in [('index.html','Home'),('about.html','About'),('services.html','Services'),('projects.html','Projects'),('customer-testimonials.html','Testimonials'),('service-areas-faq.html','FAQs'),('contact.html','Contact')]:
     if label == 'Services':
-        nav += '<div class="services-navigation"><div class="services-trigger"><a href="services.html">Services</a><button hidden type="button" aria-label="Toggle services submenu" aria-controls="services-submenu" aria-expanded="false">Services</button></div><ul id="services-submenu" class="services-submenu">'
+        nav += '<div class="services-navigation"><div class="services-trigger"><a href="services.html">Services</a></div><ul id="services-submenu" class="services-submenu">'
         nav += ''.join(f'<li><a href="{url}">{name}</a></li>' for url,name in SERVICES)
         nav += '</ul></div>'
     else:
@@ -46,8 +47,11 @@ for page in ROOT.glob('*.html'):
     footer,n=re.subn(r'<ul\b[^>]*>.*?</ul>',lambda _:social_html,footer,count=1,flags=re.S)
     assert n == 1, page
     s=s[:a]+footer+s[b:]
-    if 'src="assets/site-navigation.js"' not in s:
-        s=s.replace('</head>','<script defer src="assets/site-navigation.js"></script>\n</head>',1)
+    version = hashlib.sha256((ROOT/'assets/site-navigation.js').read_bytes()).hexdigest()[:12]
+    script = f'<script defer src="assets/site-navigation.js?v={version}"></script>'
+    s,n = re.subn(r'<script defer src="assets/site-navigation\.js(?:\?[^"]*)?"></script>', lambda _:script, s)
+    if not n:
+        s=s.replace('</head>',script+'\n</head>',1)
     if 'id="navigation-ready"' not in s:
         s=s.replace('<head>','<head><script id="navigation-ready">document.documentElement.classList.add("nav-js")</script>',1)
     page.write_text(s,encoding='utf-8')

@@ -1,10 +1,10 @@
 (() => {
   const group = document.querySelector('.services-navigation');
   if (!group) return;
-  const toggle = group.querySelector('button');
   const link = group.querySelector('.services-trigger > a');
   const panel = group.querySelector('.services-submenu');
-  const desktop = matchMedia('(min-width: 980px) and (hover: hover)');
+  const navigation = group.closest('nav');
+  const desktop = matchMedia('(hover: hover)');
   let dismissed = false;
   let pointerInside = false;
   document.addEventListener('pointerdown', event => {
@@ -14,12 +14,11 @@
   document.addEventListener('pointercancel', () => { pointerInside = false; });
   const setOpen = open => {
     panel.hidden = !open;
-    toggle.setAttribute('aria-expanded', String(open));
     link.setAttribute('aria-expanded', String(open));
   };
   const syncTrigger = () => {
-    toggle.hidden = desktop.matches;
-    link.hidden = !desktop.matches;
+    if (desktop.matches) link.removeAttribute('role');
+    else link.setAttribute('role', 'button');
   };
   link.setAttribute('aria-controls', panel.id);
   syncTrigger();
@@ -27,24 +26,34 @@
     if (event.key === 'ArrowDown') {
       event.preventDefault(); dismissed = false; setOpen(true);
       panel.querySelector('a').focus();
+    } else if (!desktop.matches && event.key === ' ') {
+      event.preventDefault(); setOpen(panel.hidden);
     }
   });
   group.classList.add('enhanced');
   setOpen(false);
-  toggle.addEventListener('click', () => {
+  link.addEventListener('click', event => {
+    // Mouse browsers follow the overview link; only touch needs a tap disclosure.
+    if (desktop.matches || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
     dismissed = !panel.hidden;
     setOpen(panel.hidden);
   });
   group.addEventListener('pointerenter', () => {
     if (desktop.matches && !dismissed) setOpen(true);
   });
-  group.addEventListener('pointerleave', () => {
+  const leaveNavigation = event => {
     if (!desktop.matches) return;
+    // A wrapped ribbon places the in-flow submenu below other navigation links.
+    // Keep it open while the pointer crosses that ribbon to reach the submenu.
+    if (innerWidth < 980 && navigation.contains(event.relatedTarget)) return;
     dismissed = false;
     if (!group.contains(document.activeElement)) setOpen(false);
-  });
+  };
+  group.addEventListener('pointerleave', leaveNavigation);
+  navigation.addEventListener('pointerleave', leaveNavigation);
   group.addEventListener('focusin', event => {
-    if (desktop.matches && !dismissed && event.target !== toggle) setOpen(true);
+    if (desktop.matches && !dismissed && !pointerInside) setOpen(true);
   });
   group.addEventListener('focusout', event => {
     // Safari may focus the header rather than an anchor on pointer-down.
@@ -53,7 +62,7 @@
   });
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !panel.hidden) {
-      dismissed = true; setOpen(false); (desktop.matches ? link : toggle).focus();
+      dismissed = true; setOpen(false); link.focus();
     }
   });
   document.addEventListener('click', event => {

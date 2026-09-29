@@ -6,10 +6,12 @@ Local preview: http://127.0.0.1:8003. This update is not merged or deployed.
 ## What changed
 
 - FAQs now appears immediately before Contact in the header on all ten pages.
-- Services has no dropdown arrow. On desktop its text link opens seven submenu
-  links on hover or keyboard focus; on phones a matching Services text button
-  opens the submenu, with See all services linking to the overview. Escape and
-  outside-click dismissal are supported. Links remain available without JS.
+- Services uses one text link with no arrow or duplicate button. Mouse browsers
+  open the submenu on hover at every width; clicking Services follows the
+  overview link. Keyboard focus/ArrowDown also open it. Touch-only devices tap
+  the same text, then choose a service or See all services. Escape and outside
+  clicks dismiss it. Links remain available without JS. The shared script has
+  a content-derived version so cached older logic cannot mismatch new markup.
 - New pages cover luxury home builds, home renovations and additions, and
   frameless showers and maintenance. Each has its own metadata, breadcrumb,
   service scope, process, relevant existing photograph, local coverage, FAQs
@@ -31,12 +33,12 @@ Local preview: http://127.0.0.1:8003. This update is not merged or deployed.
 
 ## Validation
 
-- 120 layout/navigation cases: all ten pages at 320, 390, 430, 768, 1440 and
+- 180 layout/navigation cases: all ten pages at 320, 390, 430, 768, 905, 979, 980, 1440 and
   1920 CSS pixels, in Chromium 153.0.8010.12 and WebKit 26.6.
 - Additional interaction coverage: hover, keyboard focus, Enter, Escape,
   outside click, repeated phone taps, following submenu links, 844x390
   landscape, doubled text and JavaScript disabled.
-- 88 compatibility cases: all ten pages in both engines at four widths,
+- 132 compatibility cases: all ten pages in Chromium, WebKit and Edge at four widths,
   plus contact validation. Outgoing contact launches were intercepted.
 - 225 image placements checked at DPR 2. Source sizes meet the displayed
   requirement up to original resolution. No duplicate hero network downloads.
@@ -49,19 +51,19 @@ Local preview: http://127.0.0.1:8003. This update is not merged or deployed.
 
 | Page | Mobile Performance | Desktop Performance | Accessibility / Best Practices / SEO |
 | --- | ---: | ---: | --- |
-| Home | 91 | 100 | 100 / 100 / 100 |
+| Home | 96 | 100 | 100 / 100 / 100 |
 | Services | 100 | 100 | 100 / 100 / 100 |
 | FAQs | 100 | 100 | 100 / 100 / 100 |
-| Luxury home builds | 99 | 100 | 100 / 100 / 100 |
+| Luxury home builds | 100 | 100 | 100 / 100 / 100 |
 | Home renovations | 100 | 100 | 100 / 100 / 100 |
 | Frameless showers | 100 | 100 | 100 / 100 / 100 |
 
-Home, FAQs and Luxury home builds were confirmed with three runs; the table
-uses their medians. Other pages use the final single run. All measured pages
-have zero CLS and zero TBT. The homepage's approximately 3.5s simulated mobile
-LCP reflects its sharper, native-size hero. Image quality was explicitly
-prioritised over preserving the previous 99 Performance score. These are local
-lab scores, not live-site results or a ranking guarantee.
+These are single-run measurements from the full ten-page follow-up audit.
+A final homepage recheck after the pointer-path correction scored 91 mobile
+Performance (3.5s LCP), versus 96 (2.7s LCP) in the earlier run. Accessibility,
+Best Practices and SEO remained 100. Performance varies between local runs;
+sharper images are retained. These are local lab results, not live-site scores
+or a ranking guarantee.
 
 ## Maintenance
 
@@ -106,3 +108,43 @@ and assets automatically through its reference manifest.
   worthwhile follow-up work outside this website update.
 - No new hosting rollback folders were created. A future deployment needs a
   fresh, explicitly recorded recovery approach; deleted backups cannot be used.
+
+## Follow-up navigation bug audit
+
+The open 905px preview paired new two-control markup with an immutable-cached
+older script, leaving both Services labels visible. There is now only one
+trigger in the HTML. Script URLs are versioned automatically by the chrome
+helper. Hover follows input capability, not a 980px width cutoff.
+
+Real pointer paths exposed a gap across wrapped navigation on narrow mouse
+browsers. The submenu now stays open while crossing that row. The audit also
+found and fixed footer social icons overflowing at 980px, preserving their
+usual desktop placement and 44px targets.
+
+Verification on localhost:
+
+- 180 page/viewport cases in Chromium and WebKit; hover regression widths
+  include 905px and both sides of the 980px breakpoint.
+- Eight realistic pointer-path checks and 28 actual submenu navigations
+  cover all seven destinations with mouse and touch in both engines.
+- 140 real header-link navigations over HTTP and file URLs; 56 quotation
+  layout cases; 225 image placements. Image checks now wait for decoding
+  before asserting readiness, avoiding a transient loading race.
+- 825 local references checked, including fragments and assets. Canonicals,
+  sitemap inclusion, one H1 per page, JSON-LD and script version hashes pass.
+- Contact validation and WhatsApp destination checks send no enquiries.
+- All ten pages scored 100 Accessibility, Best Practices and SEO on mobile
+  and desktop. Desktop Performance was 100 throughout. Mobile Performance:
+  Home 91–96 across two runs, About 98, Projects 99, Testimonials 99; all other pages 100.
+  These are local single-run measurements, not live-site guarantees.
+- Firefox could not start (`spawn UNKNOWN`); no Firefox pass is claimed.
+  Physical iPhone testing remains outside this desktop audit.
+
+Reproduce with `audit_site_update.cjs`, `audit_hover_path.cjs`,
+`audit_service_destinations.cjs`, `audit_static_links.py`,
+`audit_compatibility.cjs chromium webkit edge`, `audit_quotation_layout.cjs`,
+`audit_header_navigation.cjs`, `audit_image_delivery.cjs` and
+`audit_lighthouse.mjs`. Set `AUDIT_BASE_URL=http://127.0.0.1:8003`.
+Raw Lighthouse reports use the `-hover-audit` suffix under ignored `audits/`;
+the final homepage recheck uses `-hover-final`.
+This remains a review-branch update, not a merge or WebHostMost deployment.

@@ -8,7 +8,7 @@ const results=[];
  for(const [engine,type] of Object.entries({chromium,webkit}).filter(([name])=>!process.argv[2]||name===process.argv[2])) {
   const browser=await type.launch();
   try {
-   for(const width of [320,390,430,768,1440,1920]) {
+   for(const width of [320,390,430,768,905,979,980,1440,1920]) {
     const page=await browser.newPage({viewport:{width,height:900},deviceScaleFactor:2,...(width<768?{isMobile:true,hasTouch:true}:{})});
     for(const name of pages) {
      const errors=[];const handler=e=>errors.push(e.message);page.on('pageerror',handler);
@@ -16,14 +16,16 @@ const results=[];
      await page.evaluate(()=>document.fonts.ready);
      assert.equal(await page.locator('.recovered-nav > a, .services-trigger > a').count(),7);
      assert.deepEqual(await page.locator('.recovered-nav > a').allTextContents(),['Home','About','Projects','Testimonials','FAQs','Contact']);
-     const toggle=width>=980?page.locator('.services-trigger > a'):page.getByRole('button',{name:'Toggle services submenu'}), panel=page.locator('#services-submenu');
+     const toggle=page.locator('.services-trigger > a'), panel=page.locator('#services-submenu');
      assert.equal(await page.locator('.services-trigger svg').count(),0);
+     assert.equal(await page.locator('.services-trigger > *').count(),1);
+     assert.equal(await page.locator('.services-trigger > :visible').count(),1);
      assert.equal(await panel.isVisible(),false);
      if(width<768) {
       await toggle.tap();assert.equal(await panel.isVisible(),true);
       await toggle.tap();assert.equal(await panel.isVisible(),false);
      }
-     await toggle.focus();await page.keyboard.press(width>=980?'ArrowDown':'Enter');assert.equal(await panel.isVisible(),true);
+     await toggle.focus();await page.keyboard.press(width>=768?'ArrowDown':'Enter');assert.equal(await panel.isVisible(),true);
      assert.equal(await toggle.getAttribute('aria-expanded'),'true');
      assert.equal(await panel.locator('a').count(),7);
      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Open menu overflows');
@@ -42,6 +44,20 @@ const results=[];
     }
     await page.close();console.log(engine,width,': all ten pages PASS');
    }
+   // A narrow browser with a mouse must hover too; width is not input type.
+   for(const width of [320,390,768,905,979,980,1440]) {
+    const mouse=await browser.newPage({viewport:{width,height:900}});
+    await mouse.goto(base+'/about.html');
+    const trigger=mouse.locator('.services-trigger > a'), menu=mouse.locator('#services-submenu');
+    assert.equal(await mouse.locator('.services-trigger > :visible').count(),1);
+    await trigger.hover();assert(await menu.isVisible(),'Hover must open at '+width);
+    await mouse.mouse.move(1,1);assert.equal(await menu.isVisible(),false,'Pointer exit must close');
+    await trigger.hover();
+    await mouse.locator('#services-submenu a').last().hover();assert(await menu.isVisible(),'Menu must remain reachable');
+    await trigger.click();await mouse.waitForURL('**/services.html');
+    assert.equal(await mouse.locator('.services-trigger > :visible').count(),1);
+    await mouse.close();
+   }
    let page=await browser.newPage({viewport:{width:1440,height:900}});
    await page.goto(base+'/index.html');
    await page.locator('.services-trigger > a').hover();assert(await page.locator('#services-submenu').isVisible());
@@ -53,7 +69,7 @@ const results=[];
    // Use fresh contexts for each profile; the Windows WebKit build can crash
    // when resizing an AVIF page immediately after a cross-document navigation.
    await page.close();page=await browser.newPage({viewport:{width:844,height:390}});
-   await page.goto(base+'/frameless-showers.html');await page.getByRole('button',{name:'Toggle services submenu'}).click();
+   await page.goto(base+'/frameless-showers.html');await page.locator('.services-trigger > a').hover();
    await page.getByRole('link',{name:'See all services',exact:true}).scrollIntoViewIfNeeded();
    const last=await page.getByRole('link',{name:'See all services',exact:true}).boundingBox();assert(last.y+last.height<=390,'Landscape menu unreachable');
    await page.close();page=await browser.newPage({viewport:{width:390,height:900}});
@@ -67,7 +83,7 @@ const results=[];
    await nojs.goto(base+'/index.html');assert.equal(await nojs.locator('#services-submenu a:visible').count(),7);
    await nojs.getByRole('link',{name:'Home renovations and additions',exact:true}).click();await nojs.waitForURL('**/home-renovations.html');await nojs.close();
    const touch=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
-   await touch.goto(base+'/index.html');await touch.getByRole('button',{name:'Toggle services submenu'}).tap();
+   await touch.goto(base+'/index.html');await touch.locator('.services-trigger > a').tap();
    await touch.locator('#services-submenu a[href="home-renovations.html"]').tap();await touch.waitForURL('**/home-renovations.html');await touch.waitForLoadState('networkidle');await touch.close();
    console.log(engine,'hover, keyboard, navigation, landscape, doubled text, no-JS: PASS');
   } finally {await browser.close();}

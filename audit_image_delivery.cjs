@@ -20,6 +20,7 @@ const capture=process.argv.includes('--capture');
       }
      });
     }
+    if(!capture) await page.waitForFunction(() => [...document.querySelectorAll('main img')].filter(e=>e.getBoundingClientRect().width>0).every(e=>e.complete&&e.naturalWidth>0), null, {timeout:15000});
     const images=await page.locator('main img').evaluateAll((es,args)=>es.map(e=>({page:args.name,viewport:args.width,id:e.id,src:e.getAttribute('src'),selected:e.currentSrc,width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height,fit:getComputedStyle(e).objectFit,background:!!e.closest('wow-image'),loaded:e.complete&&e.naturalWidth>0})),{name,width});
     for(const image of images) {
      const source=inventory.find(r=>r.page===name+'.html'&&r.original===image.src);
