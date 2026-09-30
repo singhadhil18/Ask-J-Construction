@@ -1,6 +1,54 @@
 # ASKJ production hosting
 
-## Current release - 30 September 2026, 09:22 UTC
+## Current release - 30 September 2026, 10:39 UTC
+
+- Live: https://askjconstruction.co.za/
+- Source: `0949bc6702140d9f6bf275c5f174f94d5fd5db4a`, pushed to `main`.
+- Artifact: `d52866f4f0a7b7d47bf58afbaff9348717b59f1d`, fast-forward on the hosting release branch.
+- Web root: `/home/xesuzeeq/domains/askjconstruction.co.za/public_html`.
+- Stage: `/home/xesuzeeq/domains/askjconstruction.co.za/stage-favicon-0949bc6`.
+- Receipt: `/home/xesuzeeq/domains/askjconstruction.co.za/last-deployment.json`.
+- Recoverable rollback: `/home/xesuzeeq/.trash/askj-20260930T103948Z` (available).
+
+Published the bold, text-free building favicon on all ten pages, narrow-desktop
+Home/Projects layout fixes, trimmed-name validation, the full-number phone field,
+tap-to-call links and Projects spelling corrections. The testimonial form retains
+“Submit” and “Review Submitted Successfully” as explicitly requested; it still
+transmits and stores nothing.
+
+Validation before deployment: 200 content-bound checks across ten widths in
+Chromium and WebKit, six desktop/mobile/landscape journey profiles, intercepted
+contact handoffs, and eight testimonial keyboard/touch/reduced-motion profiles.
+All 396 artifact files matched the tested build and installed server files by
+SHA-256. Sixteen files were installed; thirteen previous files (2,492,454 bytes)
+were retained for rollback. The 13,238 extra assets, including the former JPEG
+favicons, remain for cached-page compatibility. No additional obsolete public
+files were confirmed for removal, and Trash was not emptied.
+
+Live checks passed: 24 affected-page/viewport layout checks, full phone handoff,
+invalid-name recovery, tappable phone links and eight no-storage testimonial
+profiles in Chromium 153.0.8010.12 and WebKit 26.6. Twenty-one public files matched
+the artifact over HTTPS, including all ten pages and the new PNG icons; icon MIME
+types/dimensions, favicon declarations, canonical redirects and protected paths
+were verified. These are emulated browser tests; no customer messages were sent.
+
+Lighthouse 13.5.0, standard simulated profiles, one run per device:
+
+| Environment / homepage | Mobile P/A/BP/SEO | Desktop P/A/BP/SEO |
+| --- | --- | --- |
+| Local compressed production build | 97/100/100/100 | 100/100/100/100 |
+| Live WebHostMost | 99/100/100/100 | 99/100/100/100 |
+
+Live LCP was 2.1s mobile and 0.8s desktop. Scores are individual lab runs, not field
+measurements or three-run medians. The reusable Lighthouse runner now uses the
+official desktop configuration, including its desktop user agent.
+
+Google Search will choose/update the favicon after recrawling the homepage;
+publication does not immediately replace Google's cached search icon. Details:
+`design/favicon-notes.md`. Bug evidence and regression commands:
+`BUG-CHECK-2026-09-30.md`.
+
+## Previous release - 30 September 2026, 09:22 UTC
 
 - Live: https://askjconstruction.co.za/services.html
 - Source: `68926de755715b5d37e6382f6cb7ae76898c4a9f`, pushed to `main`.

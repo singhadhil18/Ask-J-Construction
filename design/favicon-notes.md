@@ -18,8 +18,8 @@ build. Previous JPEG assets remain available for cached pages.
 The browser audit verified all 30 page/icon declarations and image dimensions.
 The comparison at `audits/favicon-comparison.png` shows 16/24/32/48px samples on
 light and dark backgrounds. `audits/build-favicon-20260930` contains the complete
-395-file candidate, including the still-unpublished bug fixes and the user's
-restored testimonial success wording. This favicon has not yet been deployed.
+395-file candidate, including the bug fixes and the user's
+restored testimonial success wording. This favicon was deployed to https://askjconstruction.co.za/ on 30 September 2026 at 10:39 UTC from source `0949bc6`.
 
 Google's favicon guidance was checked at:
 https://developers.google.com/search/docs/appearance/favicon-in-search
