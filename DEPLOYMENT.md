@@ -8,7 +8,20 @@
 - Web root: `/home/xesuzeeq/domains/askjconstruction.co.za/public_html`.
 - Stage: `/home/xesuzeeq/domains/askjconstruction.co.za/stage-header-848fa03`.
 - Receipt: `/home/xesuzeeq/domains/askjconstruction.co.za/last-deployment.json`.
-- Recovery: `/home/xesuzeeq/.trash/askj-20260930T073103Z`.
+- Recovery: removed on 30 September 2026 at the user's explicit request; the former path `/home/xesuzeeq/.trash/askj-20260930T073103Z` is no longer available.
+
+### Hosting cleanup — 30 September 2026, 07:37 UTC
+
+The user explicitly selected emptying the entire account Trash, including other
+sites' rollback copies, plus deletion of the six older ASKJ staging releases.
+Cleanup permanently removed 17,561 files totalling 1,051,886,159 bytes. The
+provider's `files` and `info` Trash directories remain empty. All 13,631 live
+ASKJ files and 396 current staging files were verified unchanged by SHA-256;
+the current stage and release repository were preserved. Git release history
+was not rewritten. The deployment receipt now marks rollback unavailable.
+Cleanup receipt: `/home/xesuzeeq/domains/askjconstruction.co.za/cleanup-20260930T073750Z.json`.
+
+### Release details
 
 Desktop navigation now places the logo left, headings centrally and the quote
 action right. Below 980px, the compact sticky ribbon contains the hamburger,
