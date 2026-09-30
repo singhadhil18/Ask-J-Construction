@@ -1,6 +1,6 @@
 # Responsive header review — 30 September 2026
 
-Changes based on main at c2fbba3. Delivery target: GitHub `main`, as requested on 30 September 2026. Live hosting deployment is outside this delivery request.
+Changes based on main at c2fbba3, committed and pushed as `848fa03`. Deployed to WebHostMost on 30 September 2026 at 07:31 UTC after the user's separate deployment request. See DEPLOYMENT.md for the live validation and rollback receipt.
 Preview: http://127.0.0.1:8001/ (`python serve_site.py --port 8001`).
 
 - Desktop: logo left, padded heading tiles through the middle, quote action right. The ribbon is approximately 132–150px high, depending on viewport width.

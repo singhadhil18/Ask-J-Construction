@@ -1,6 +1,48 @@
 # ASKJ production hosting
 
-## Current release - 29 September 2026, 13:06 UTC
+## Current release - 30 September 2026, 07:31 UTC
+
+- Live: https://askjconstruction.co.za/
+- Source: `848fa033e9bba4627caa742e750e8762a4e17128`, pushed to `main`.
+- Artifact: `c084c2e1a1cde9c93723d0a502b74b8883240f4b`, fast-forward on the existing hosting release branch.
+- Web root: `/home/xesuzeeq/domains/askjconstruction.co.za/public_html`.
+- Stage: `/home/xesuzeeq/domains/askjconstruction.co.za/stage-header-848fa03`.
+- Receipt: `/home/xesuzeeq/domains/askjconstruction.co.za/last-deployment.json`.
+- Recovery: `/home/xesuzeeq/.trash/askj-20260930T073103Z`.
+
+Desktop navigation now places the logo left, headings centrally and the quote
+action right. Below 980px, the compact sticky ribbon contains the hamburger,
+logo and quote action, with a left-side modal navigation drawer. Re-selecting
+the current page's heading or homepage logo scrolls to the top over 1.1 seconds
+without reloading. Reduced motion, keyboard dismissal, scroll preservation and
+interruption are supported. Mobile Services has a separate expansion arrow.
+The narrow-screen homepage title and estimate button retain 16px side padding.
+
+All 396 artifact files matched the tested workspace and committed release
+blobs by SHA-256, then matched the installed server files. Fifteen replaced
+files (2,429,163 bytes) and the previous receipt were saved in recoverable Trash.
+The existing 13,235 extra assets were retained for cached-page compatibility.
+No confirmed obsolete files, exposed source files or temporary deployment files
+were found in the live root. Nothing was purged; hosting configuration was
+verified unchanged.
+
+Live verification passed in Chromium 153.0.8010.12 and WebKit 26.6:
+
+- Forty layout checks: all ten pages at 390px and 1440px in both engines.
+- All seven same-page heading links on desktop/mobile: animation timing,
+  final scroll position, no reload or Contact draft loss, logo behavior,
+  interruption, reduced motion, other-page navigation and service disclosure.
+- Nineteen public page/support/asset responses matched the artifact hashes.
+- HTTPS, canonical redirects, protected paths and a real unknown-page 404.
+- Desktop, mobile and expanded-drawer screenshots inspected.
+
+Local verification is recorded in HEADER-REVIEW.md. No new Lighthouse runs were
+performed for this deployment. Physical devices remain unverified. The
+testimonial form remains a disclosed preview with no storage or transmission.
+This documentation commit follows the deployed source; it does not change the
+public artifact.
+
+## Previous release - 29 September 2026, 13:06 UTC
 
 - Live: https://askjconstruction.co.za/customer-testimonials.html
 - Source: `298ff82485045f9cebce4b2b1eb1b63613cb4908`.
