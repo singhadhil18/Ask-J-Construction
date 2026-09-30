@@ -7,24 +7,27 @@
     max-width: 100% !important;
   }
   #SITE_HEADER {
-    grid-template-columns: minmax(0, 1fr) 160px;
+    grid-template-columns: 44px minmax(0, 1fr) auto;
     min-height: 0;
     height: auto;
     max-height: none;
-    grid-template-rows: calc(160px * 165 / 259) auto;
-    padding: 8px 16px;
+    grid-template-rows: auto;
+    padding: 8px max(12px, env(safe-area-inset-right)) 8px max(12px, env(safe-area-inset-left));
     gap: 8px;
   }
-  #SITE_HEADER .header-logo, #SITE_HEADER .header-logo img { width: 160px; }
+  #SITE_HEADER .header-logo { width: min(100%, 112px); justify-self: center; }
+  #SITE_HEADER .header-logo img { width: 100%; }
   #SITE_HEADER .header-logo img { height: auto; aspect-ratio: 259 / 165; }
   #SITE_HEADER .header-quote { padding: 0 10px; font-size: 13px; }
-  #SITE_HEADER .recovered-nav {
+  #SITE_HEADER > .recovered-nav {
     grid-column: 1 / -1;
     justify-content: center;
     justify-self: stretch;
     max-width: none;
     width: auto;
     gap: 0 12px;
+    flex-wrap: wrap;
+    grid-row: 2;
   }
   #SITE_HEADER .recovered-nav a { display: inline-flex; align-items: center; min-height: 44px; }
   #PAGES_CONTAINER [id^="comp-"],
@@ -69,7 +72,7 @@
   #PAGES_CONTAINER a.wixui-button { position: relative !important; min-height: 44px; }
   #comp-kbae5tti { min-height: 500px !important; }
   #comp-kmf632zr { order: -1; }
-  #comp-kbae5tti [data-mesh-id$="-gridContainer"] { padding: 36px 16px; }
+  #comp-kbae5tti [data-mesh-id$="-gridContainer"] { padding: 36px 16px; box-sizing: border-box; }
   #comp-jnod9lp56, #comp-jnod9lp58, #comp-jnod9lp510 { min-height: 380px !important; }
   #comp-jnod9lp56 a, #comp-jnod9lp58 a, #comp-jnod9lp510 a { min-height: 380px !important; }
   /* Preserve centred labels over the homepage service photographs. */
@@ -101,12 +104,4 @@
     flex: 1 1 0 !important;
     width: 0 !important;
   }
-}
-@media (max-width: 360px) {
-  #SITE_HEADER {
-    grid-template-columns: minmax(0, 1fr) 120px;
-    grid-template-rows: calc(120px * 165 / 259) auto;
-  }
-  #SITE_HEADER .header-logo, #SITE_HEADER .header-logo img { width: 120px; }
-  #SITE_HEADER .header-quote { padding: 0 8px; font-size: 12px; }
 }

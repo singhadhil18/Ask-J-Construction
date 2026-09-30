@@ -40,7 +40,8 @@ const base = (process.env.AUDIT_BASE_URL || 'http://127.0.0.1:8001').replace(/\/
           assert.equal(await nav.first().evaluate(e=>getComputedStyle(e,'::before').opacity),'1');
           await quote.click();
         } else {
-          await page.locator('.services-trigger a').tap();
+          await page.locator('.menu-toggle').tap();
+          await page.locator('.services-toggle').tap();
           assert(await page.locator('#services-submenu').isVisible());
           await page.locator('#services-submenu a').first().tap();
           await page.waitForURL(base + '/luxury-home-builds.html');
