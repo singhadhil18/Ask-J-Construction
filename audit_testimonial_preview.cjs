@@ -36,6 +36,7 @@ const {chromium, webkit} = require('./.qa-tools/node_modules/playwright-core');
           await page.locator('.review-success').waitFor({state:'visible'});
           await page.waitForFunction(()=>document.activeElement?.classList.contains('review-success'));
           assert(await form.isHidden());
+          assert.equal(await page.locator('.review-success h2').textContent(),'Review Submitted Successfully');
           await page.waitForTimeout(650);
           assert(await page.locator('.review-success').evaluate(e=>e.getBoundingClientRect().top>=document.querySelector('#SITE_HEADER').getBoundingClientRect().bottom),'Confirmation covered by sticky header');
           assert((await pane.boundingBox()).height<before.height/2);

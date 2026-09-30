@@ -171,6 +171,45 @@
 </style><style data-source="site-updates.css">
 /* Keep the recovered navigation and quote action with the existing header. */
 .delivery-picture { display: contents; }
+/* Reflow fixed Wix coordinates before they clip in narrow desktop windows. */
+@media (min-width: 980px) and (max-width: 1359px) {
+  #PAGES_CONTAINER .project-gallery-section { padding: 40px; box-sizing: border-box; }
+  #PAGES_CONTAINER .project-gallery-section [data-mesh-id$="-gridContainer"] {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none; gap: 24px; min-height: 0; height: auto;
+  }
+  #PAGES_CONTAINER .project-gallery-section [data-mesh-id$="-gridContainer"] > [id] {
+    position: relative; left: auto; top: auto; margin: 0; width: 100%; height: auto;
+    min-width: 0; max-width: 100%; grid-area: auto; align-self: start;
+  }
+  #PAGES_CONTAINER .project-gallery-section .wixui-rich-text { grid-column: 1 / -1 !important; }
+  #PAGES_CONTAINER #comp-mlqoedcu { grid-area: 4 / 1 / 6 / 2; }
+  #PAGES_CONTAINER #comp-mlqogu1i { grid-area: 4 / 2 / 5 / 3; grid-column: 2 !important; }
+  #PAGES_CONTAINER #comp-mlqpit15 { grid-area: 5 / 2 / 6 / 3; grid-column: 2 !important; }
+  #PAGES_CONTAINER #comp-mlqqq431 { grid-area: 1 / 1 / 2 / 2; grid-column: 1 !important; }
+  #PAGES_CONTAINER #comp-mlqqq436 { grid-area: 2 / 1 / 3 / 2; grid-column: 1 !important; }
+  #PAGES_CONTAINER #comp-mlqqy42k { grid-area: 1 / 2 / 3 / 3; }
+  #PAGES_CONTAINER #comp-mlqybvk2 { grid-area: 1 / 1 / 3 / 2; }
+  #PAGES_CONTAINER #comp-mlqtq6b1 { grid-area: 1 / 2 / 2 / 3; grid-column: 2 !important; }
+  #PAGES_CONTAINER #comp-mlqtq6b3 { grid-area: 2 / 2 / 3 / 3; grid-column: 2 !important; }
+  #PAGES_CONTAINER .project-gallery-section [data-mesh-id*="-wedge-"] { display: none; }
+  #PAGES_CONTAINER .project-gallery-section .wixui-image > div { position: relative; }
+  #PAGES_CONTAINER .project-gallery-section .wixui-image img { position: relative; width: 100%; height: auto; display: block; }
+  #PAGES_CONTAINER [data-mesh-id="comp-kbae6awr3inlineContent-gridContainer"] {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto auto; gap: 24px 40px;
+    width: calc(100% - 80px); margin: 56px auto; min-height: 0; height: auto;
+    align-items: center;
+  }
+  #PAGES_CONTAINER [data-mesh-id="comp-kbae6awr3inlineContent-gridContainer"] > [id] {
+    left: auto; top: auto; margin: 0; width: 100%; height: auto; min-width: 0;
+    grid-area: auto / 2; align-self: center;
+  }
+  #PAGES_CONTAINER #comp-mmkexbm3 { grid-area: 1 / 1 / 4 / 2; }
+  #PAGES_CONTAINER #comp-mmkexbm3 > div { position: relative; }
+  #PAGES_CONTAINER #comp-mmkexbm3 img { position: relative; width: 100%; height: auto; display: block; }
+  #PAGES_CONTAINER #comp-kbae6awx { width: 173px; height: 44px; }
+}
 /* Standalone testimonial form, replacing the inactive recovered Wix widget. */
 #comp-mm7tceqb.testimonial-section { min-width: 0; padding: 48px 20px; box-sizing: border-box; }
 .testimonial-pane { max-width: 680px; margin: auto; padding: 40px; box-sizing: border-box; background: #f5f5f5; border: 1px solid #ddd; overflow: hidden; font: 15px/1.6 Arial, sans-serif; color: #222; }
@@ -721,9 +760,9 @@ html:not(.nav-js) #SITE_HEADER:has(.services-navigation:not(.enhanced)) { height
 </style>
 <link rel="preload" href="assets/f27324544bae49d76209.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/c120899d2f75a6443669.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="icon" type="image/jpeg" sizes="192x192" href="assets/favicon-192.jpg">
-<link rel="icon" type="image/jpeg" sizes="32x32" href="assets/favicon-32.jpg">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.jpg">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 <meta name="description" content="Custom frameless shower installation, servicing and maintenance in Durban and the North Coast. Contact ASKJ about a new shower or an existing glass enclosure."><meta property="og:title" content="Frameless Showers &amp; Repairs Durban | ASKJ"><meta property="og:description" content="Custom frameless shower installation, servicing and maintenance in Durban and the North Coast. Contact ASKJ about a new shower or an existing glass enclosure."><meta property="og:url" content="https://askjconstruction.co.za/frameless-showers.html"><script defer src="assets/site-navigation.js?v=9f4272b0acfd"></script>
 </head>
 <body class='' >
