@@ -1,6 +1,40 @@
 # ASKJ production hosting
 
-## Current release - 30 September 2026, 07:31 UTC
+## Current release - 30 September 2026, 09:22 UTC
+
+- Live: https://askjconstruction.co.za/services.html
+- Source: `68926de755715b5d37e6382f6cb7ae76898c4a9f`, pushed to `main`.
+- Artifact: `a67a3582abfe7296f1f172f228bc2a0b8114fddb`, fast-forward on the hosting release branch.
+- Web root: `/home/xesuzeeq/domains/askjconstruction.co.za/public_html`.
+- Stage: `/home/xesuzeeq/domains/askjconstruction.co.za/stage-services-68926de`.
+- Receipt: `/home/xesuzeeq/domains/askjconstruction.co.za/last-deployment.json`.
+- Rollback: deleted after live verification, as explicitly requested by the user.
+
+The Services page now has six consistent semantic headings, corrected copy,
+matching title links and hover/focus styling, and a responsive grid that stays
+within the viewport at the 980px desktop breakpoint. The final three headings
+link to their existing Services menu sections; the first three retain their
+separate detail pages.
+
+The 395-file production build passed local Services layout/link checks at nine
+widths from 320 to 1920px in Chromium 153.0.8010.12 and WebKit 26.6, plus the
+existing desktop/mobile navigation and smooth-scroll checks. All 396 artifact
+files (including release metadata) matched the committed artifact and installed
+server files by SHA-256. Live checks repeated all nine widths in both engines,
+loaded and decoded all six service photos, and exercised the three section
+links. Screenshots were inspected. Coverage is browser emulation, not physical
+device testing. Live public root files and navigation JavaScript matched the
+build; HTTPS, the Services directory redirect, protected source/configuration
+paths and a genuine unknown-page 404 passed.
+
+At 09:26 UTC the superseded `stage-header-848fa03` directory and this deployment's
+rollback copy were permanently deleted: 410 files, 110,093,989 bytes. All 13,631
+live files and 396 current staging files were verified unchanged after cleanup.
+The release Git history and 13,235 cached compatibility assets remain intact.
+No additional unused public files were confirmed for removal.
+Cleanup receipt: `/home/xesuzeeq/domains/askjconstruction.co.za/cleanup-services-20260930T092606Z.json`.
+
+## Previous release - 30 September 2026, 07:31 UTC
 
 - Live: https://askjconstruction.co.za/
 - Source: `848fa033e9bba4627caa742e750e8762a4e17128`, pushed to `main`.

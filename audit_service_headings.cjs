@@ -9,6 +9,11 @@ const base = process.env.AUDIT_BASE_URL || 'http://127.0.0.1:8001';
         const page = await browser.newPage({viewport: {width, height: 900}});
         await page.goto(`${base}/services.html`);
         await page.evaluate(() => document.fonts.ready);
+        for (const photo of await page.locator('.service-photo-block img').all()) {
+          await photo.scrollIntoViewIfNeeded();
+          await photo.evaluate(img => img.decode());
+        }
+        await page.evaluate(() => scrollTo({top:0,behavior:'instant'}));
         const data = await page.evaluate(() => {
           const rect = el => { const r = el.getBoundingClientRect(); return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom}; };
           return {
